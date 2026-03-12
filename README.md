@@ -1,69 +1,152 @@
-<h1 align="center">Push_swap </h1>
+<h1 align="center">push_swap</h1>
 
-<div align="center">🤔A project with the objective to sort numbers, limited by type of moviments and using 2 stacks.</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/language-C-blue.svg" alt="Language">
+  <img src="https://img.shields.io/badge/42-School-black.svg" alt="42 School">
+  <img src="https://img.shields.io/badge/status-complete-brightgreen.svg" alt="Status">
+</p>
 
-![](https://github.com/GSousa101/pushswap_42/blob/main/sort.gif)
+<p align="center">
+  A sorting algorithm challenge — sort a stack of numbers using the minimum possible number of operations with only two stacks and a restricted set of moves.
+</p>
 
----
-
-## 🏁 Introduction
-The main objective of this project is to implement a sorting algorithm between two stacks that could use the least amount of stack operations (described below), and those movements need to be printed to the standard output.
-
-The stack A receive a random amount of number and it must be sorted from its lowest element at the top to the biggest at bottom, while stack B must be empty at the end of the program.
-
-
-The operations (or movements) is of 4 categories: `Swap`, `Push`, `rotate` and `reverse rotate`:
-+ **sa** : Swap the firts 2 elements at the top of stack A.
-+ **sb** : Swap the firts 2 elements at the top of stack B.
-+ **ss** : Execute both __sa__ and __sb__.
-+ **pa** : Take the first element at the top of stack B and put it the top of stack A.
-+ **pb** : Take the first element at the top of stack A and put it the top of stack B.
-+ **ra** : The first element of stack A becomes the last one of itself.
-+ **rb** : The first element of stack B becomes the last one of itself.
-+ **rr** : Execute both __ra__ and __rb__.
-+ **rra** : The last element of stack A becomes the first one of itself.
-+ **rrb** : The last element of stack B becomes the first one of itself.
-+ **rrr** : Execute both __rra__ and __rrb__.
----
-
-## 🔀 The algorithm
-
-The algorith is dividide in 3 mains parts:
-
-### Check the input
-
-As the random value to be sorted comes from the user, it needs to be verified if it's possible, following the project rules, to be sorted.
-The rules are: it needs to be an interger and shall not have duplicate numbers.
-
-### Receiving the numbers
-
-At this part of the program, it will get all the input and transform it in node of our stacks. Then, it will index all of them, with this it will be easier for our program to treat with negative numbers.
-
-### Sort
-
-Finally we will get to the sorting itself. The program will choose between using a small sort to values up to 5, or using radix-sort to greater quantity of numbers.
-
-![](https://github.com/GSousa101/pushswap_42/blob/main/gifde5.gif)
-
-
-![](https://github.com/GSousa101/pushswap_42/blob/main/gifde100.gif)
+<p align="center">
+  <a href="README.pt-br.md">🇧🇷 Leia em Português</a>
+</p>
 
 ---
 
-## 📚 Links and References
+## Why this project matters
 
-[Youtube video](https://youtu.be/kPRA0W1kECg) - 15 Sorting algorithms.
+> "This project taught me how to think algorithmically under constraints — not just 'sort this', but 'sort this with the fewest possible moves, using only these specific operations'. I learned how indexing simplifies comparisons, when to apply small-sort vs. radix-sort strategies, and how to measure and optimize algorithmic complexity. These are exactly the skills tested in technical interviews and applied in high-performance systems."
 
-[Project](https://github.com/o-reo/push_swap_visualizer) of visualizer to see the stacks ordering.
-
-[Youtube Vídeo](https://www.youtube.com/watch?v=ujb2CIWE8zY&feature=youtu.be) - Why is radix sort so fast?
+Algorithm design and complexity analysis are core skills for any software engineering role. This project goes beyond implementing a known algorithm — it requires selecting and combining strategies to hit performance targets.
 
 ---
 
-## 👨🏻‍💻 Author
+## How it works
 
-Gustavo F Sousa
-- Github: [@GSousa101](https://github.com/GSousa101)
-- Linkedin: [@gustavo-sousa-dt](https://www.linkedin.com/in/gustavo-sousa-dt/)
+Two stacks — **A** and **B** — and 11 allowed operations:
 
-Give a ⭐ if this project has helped you!
+| Operation | Description |
+|---|---|
+| `sa` | Swap the top 2 elements of stack A |
+| `sb` | Swap the top 2 elements of stack B |
+| `ss` | Execute `sa` and `sb` simultaneously |
+| `pa` | Push top of B to top of A |
+| `pb` | Push top of A to top of B |
+| `ra` | Rotate A — top element goes to bottom |
+| `rb` | Rotate B — top element goes to bottom |
+| `rr` | Execute `ra` and `rb` simultaneously |
+| `rra` | Reverse rotate A — bottom element goes to top |
+| `rrb` | Reverse rotate B — bottom element goes to top |
+| `rrr` | Execute `rra` and `rrb` simultaneously |
+
+**Goal:** Sort stack A in ascending order (smallest on top) with the fewest operations. Stack B must be empty at the end.
+
+---
+
+## The algorithm
+
+### 1. Input validation
+Verifies that all inputs are valid integers within the `int` range and that there are no duplicates.
+
+### 2. Indexing
+Before sorting, all numbers are replaced by their sorted index (0, 1, 2...). This eliminates the need to handle negative numbers and large values during sorting, simplifying all comparisons.
+
+### 3. Sorting strategy
+
+**Small sort (≤ 5 elements)**
+A hardcoded decision tree optimized for the minimum number of moves in each possible case.
+
+**Radix sort (> 5 elements)**
+Numbers are sorted bit by bit using a binary radix sort over their indexes — pushing elements to B based on the current bit, then pulling them back. This guarantees O(n log n) complexity with a consistent and predictable number of operations.
+
+---
+
+## A standout technical detail
+
+The use of **indexing as a preprocessing step** before sorting is an elegant engineering decision. By converting arbitrary integers into a contiguous index sequence, the radix sort can operate on bits directly without worrying about sign bits, large values, or comparison edge cases. This pattern — normalizing data before processing — is a recurring technique in real-world data pipelines and competitive programming.
+
+---
+
+## Demo
+
+![Sorting demo](https://github.com/GSousa101/pushswap_42/blob/main/sort.gif)
+
+![5 elements sort](https://github.com/GSousa101/pushswap_42/blob/main/gifde5.gif)
+
+![100 elements sort](https://github.com/GSousa101/pushswap_42/blob/main/gifde100.gif)
+
+---
+
+## Getting Started
+
+```bash
+git clone https://github.com/gustavofsousa/pushswap_42.git
+cd pushswap_42
+make
+```
+
+### Running
+
+```bash
+# Sort a list of numbers
+./push_swap 3 1 4 1 5 9 2 6
+
+# Pipe to count operations
+./push_swap 3 1 4 1 5 9 2 6 | wc -l
+
+# Use the checker to verify correctness
+./push_swap 3 1 4 1 5 9 2 6 | ./checker 3 1 4 1 5 9 2 6
+```
+
+---
+
+## Project structure
+
+```
+pushswap_42/
+├── src/
+│   ├── push_swap.c    # Entry point + input validation
+│   ├── sort_small.c   # Optimized sort for ≤5 elements
+│   ├── sort_big.c     # Radix sort for large inputs
+│   ├── push.c         # pa / pb operations
+│   ├── swap.c         # sa / sb / ss operations
+│   ├── rotate.c       # ra / rb / rr operations
+│   ├── reverse_rotate.c # rra / rrb / rrr operations
+│   ├── checker.c      # Validates sorted output
+│   └── ft_atol.c      # Integer parsing
+├── include/           # Headers
+├── libft/             # Personal C library
+└── Makefile
+```
+
+---
+
+## References
+
+- [15 Sorting Algorithms Visualized](https://youtu.be/kPRA0W1kECg)
+- [Push Swap Visualizer](https://github.com/o-reo/push_swap_visualizer)
+- [Why is Radix Sort so Fast?](https://www.youtube.com/watch?v=ujb2CIWE8zY)
+
+---
+
+## Skills demonstrated
+
+- Algorithm design and optimization under constraints
+- Complexity analysis (O(n log n) target)
+- Data indexing and normalization
+- Bitwise operations (binary radix sort)
+- Linked list stack implementation
+- Handling edge cases in input parsing
+
+---
+
+## License
+
+This project was developed as part of the [42 School](https://42.fr) curriculum.
+
+---
+
+<p align="center">Made with ☕ at 42 Rio de Janeiro</p>
